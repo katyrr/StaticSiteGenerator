@@ -5,7 +5,7 @@ def main():
 
     test = TextNode("This is some anchor text", TextType.LINK, "https://www.boot.dev")
     alt = TextNode("a different example", TextType.BOLD)
-    extra = TextNode("This is some anchor text", TextType.IMAGE, "https://www.boot.dev")
+    extra = TextNode("This is some anchor text", TextType.LINK, "https:boot.dev")
     print(test)
     print(f"test and alt are equal: {test==alt}")
     print(f"test and extra are equal: {test==extra}")

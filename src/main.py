@@ -1,18 +1,18 @@
 from textnode import TextNode, TextType
-from htmlnode import HTMLNode
+from htmlnode import HTMLNode, ParentNode, LeafNode
 
 
 def main():
 
     
-    test = TextNode("This is some anchor text", TextType.LINK, "https://www.boot.dev")
+    '''test = TextNode("This is some anchor text", TextType.LINK, "https://www.boot.dev")
     alt = TextNode("a different example", TextType.BOLD)
     extra = TextNode("This is some anchor text", TextType.LINK, "https:boot.dev")
     print(test)
     print(f"test and alt are equal: {test==alt}")
-    print(f"test and extra are equal: {test==extra}")
+    print(f"test and extra are equal: {test==extra}")'''
 
-    test = HTMLNode("the tag", "the value", None, {"href": "alink.com"})
+    test = LeafNode("the tag", "the value", {"href": "alink.com"})
 
     print(test)
 

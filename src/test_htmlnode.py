@@ -1,6 +1,6 @@
 import unittest
 
-from htmlnode import HTMLNode, LeafNode
+from htmlnode import HTMLNode, LeafNode, ParentNode
 
 
 class TestHTMLNode(unittest.TestCase):
@@ -19,6 +19,8 @@ class TestHTMLNode(unittest.TestCase):
     leaf_node_plain = LeafNode(tag="p", value="some text")
     leaf_node_attributed = LeafNode(tag="a", value="click here", props=example_props)
     leaf_node_no_tag = LeafNode(tag=None, value="val")
+    parent_node_only_leaves = ParentNode(tag="t", children=[leaf_node_attributed, leaf_node_no_tag, leaf_node_plain])
+    parent_node_with_subparents = ParentNode(tag="a", children=[leaf_node_no_tag, parent_node_only_leaves, leaf_node_plain])
 
     cases = {
         "node_all_none":node_all_none, 
@@ -29,7 +31,9 @@ class TestHTMLNode(unittest.TestCase):
         "node_no_none":node_no_none,
         "leaf_node_plain":leaf_node_plain,
         "leaf_node_attributed":leaf_node_attributed,
-        "leaf_node_no_tag":leaf_node_no_tag
+        "leaf_node_no_tag":leaf_node_no_tag,
+        "parent_node_only_leaves":parent_node_only_leaves,
+        "parent_node_with_subparents":parent_node_with_subparents
     }
 
     def test_props_to_html(self):
@@ -61,9 +65,24 @@ class TestHTMLNode(unittest.TestCase):
 
                 self.assertEqual(c.to_html(), expected)
             
+            elif type(c)==ParentNode:
+
+                match case:
+                    case "parent_node_only_leaves": expected = '<t><a href="alink.com" target="_blank">click here</a>val<p>some text</p></t>'
+                    case "parent_node_with_subparents": expected = '<a>val<t><a href="alink.com" target="_blank">click here</a>val<p>some text</p></t><p>some text</p></a>'
+            
+                #parent_node_only_leaves = ParentNode(tag="t", children=[leaf_node_attributed, leaf_node_no_tag, leaf_node_plain])
+                #parent_node_with_subparents = ParentNode(tag="a", children=[leaf_node_no_tag, parent_node_only_leaves, leaf_node_plain])
+
+                self.assertEqual(c.to_html(), expected)
+
+
             else:
                 with self.assertRaises(NotImplementedError):
                     c.to_html()
+
+    
+        
 
 
 if __name__ == "__main__":

@@ -37,11 +37,11 @@ class TestHTMLNode(unittest.TestCase):
     }
 
     def test_props_to_html(self):
-        
+        print(f"------ testing method: props_to_html -------")
         for case in self.cases:
-            print(f"-------------------- testing: {case}--------------------")
+            print(f"\tcase: {case}")
             c = self.cases[case]
-            print(c)
+            #print(c)
             joined = c.props_to_html()
             if c.props is not None:
                 expected =  ' href="alink.com" target="_blank"'
@@ -50,9 +50,10 @@ class TestHTMLNode(unittest.TestCase):
             self.assertEqual(joined, expected)
 
     def test_to_html(self):
+        print(f"------ testing method: to_html -------")
 
         for case in self.cases:
-            print(f"testing: {case}")
+            print(f"\tcase: {case}")
             c = self.cases[case]
 
             if type(c)==LeafNode:
@@ -71,9 +72,6 @@ class TestHTMLNode(unittest.TestCase):
                     case "parent_node_only_leaves": expected = '<t><a href="alink.com" target="_blank">click here</a>val<p>some text</p></t>'
                     case "parent_node_with_subparents": expected = '<a>val<t><a href="alink.com" target="_blank">click here</a>val<p>some text</p></t><p>some text</p></a>'
             
-                #parent_node_only_leaves = ParentNode(tag="t", children=[leaf_node_attributed, leaf_node_no_tag, leaf_node_plain])
-                #parent_node_with_subparents = ParentNode(tag="a", children=[leaf_node_no_tag, parent_node_only_leaves, leaf_node_plain])
-
                 self.assertEqual(c.to_html(), expected)
 
 

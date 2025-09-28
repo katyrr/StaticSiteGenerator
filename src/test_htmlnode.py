@@ -37,7 +37,7 @@ class TestHTMLNode(unittest.TestCase):
     }
 
     def test_props_to_html(self):
-        print(f"------ testing method: props_to_html -------")
+        print(f"\n------ testing method: props_to_html -------")
         for case in self.cases:
             print(f"\tcase: {case}")
             c = self.cases[case]
@@ -50,7 +50,7 @@ class TestHTMLNode(unittest.TestCase):
             self.assertEqual(joined, expected)
 
     def test_to_html(self):
-        print(f"------ testing method: to_html -------")
+        print(f"\n------ testing method: to_html -------")
 
         for case in self.cases:
             print(f"\tcase: {case}")
